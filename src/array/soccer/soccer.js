@@ -16,6 +16,41 @@ If a value of the argument is not 1 or 2, return "Illegal argument".
 */
 // TODO add your code here
 
+function getScore(arrayOfGoals) {
+  let team1 = 0;
+  let team2 = 0;
+  let isInvalidArray = false;
+  if (arrayOfGoals !== null) {
+    if (arrayOfGoals.length <= 0) {
+      return "0-0 : draw";
+    }
+    arrayOfGoals.forEach((goal) => {
+      if (goal === 1) {
+        team1++;
+      } else if (goal === 2) {
+        team2++;
+      } else {
+        isInvalidArray = true;
+      }
+    });
+  } else {
+    return "Illegal argument";
+  }
+  if (isInvalidArray) {
+    return "Illegal argument";
+  }
+  if (team1 > team2) {
+    return `${team1}-${team2} : team 1 wins the game`;
+  } else if (team1 < team2) {
+    return `${team1}-${team2} : team 2 wins the game`;
+  } else {
+    return `${team1}-${team2} : draw`;
+  }
+}
+
+// const points = [2, 3, 1, 2, 4, 3];
+// console.log(getScore(points));
+
 // Begin of tests
 const assert = require("assert");
 assert.strictEqual(typeof getScore, "function");
