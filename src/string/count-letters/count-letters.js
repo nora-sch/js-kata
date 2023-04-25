@@ -11,11 +11,30 @@ Example:
 * "bbacbaaa" and "c" -> 1
 * "bbcc" and "a" -> 0
 * null and "a" -> -1
-
+* "hello" and "he" -> -1
+* "hello" and "" -> -1
+* "hello" and null -> -1
 Add you own tests.
 
 */
 
 // TODO add your code here
+function countChar(string, char){
+let charCount = 0;
+if(string === null || char === null || char.length !== 1){
+    return -1;
+}else{
+    const arrayOfString = string.split("");
+    arrayOfString.forEach(letter => {
+        if (letter === char) {
+            charCount++;
+        }
+    });
+}
+return charCount;
+}
+
+
+
 
 module.exports = countChar;
