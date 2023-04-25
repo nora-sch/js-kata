@@ -11,4 +11,18 @@ Example:
 
 // TODO add your code here
 
+function sum(arrayOfNumbers) {
+  let sumOdds = 0;
+  if (arrayOfNumbers !== null) {
+    arrayOfNumbers.forEach((number) => {
+      if (number % 2 !== 0) {
+        sumOdds += number;
+        // console.log(number);
+      }
+    });
+  }
+  return sumOdds;
+}
+// sum([1,2,3]);
+
 module.exports = sum;
