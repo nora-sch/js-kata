@@ -9,3 +9,18 @@ test("isPalindrome as one parameter", () => {
 });
 
 // TODO add your tests here
+test("isPalindrome is functionnal ", () => {
+  expect(isPalindrome('KAyak')).toBe(true);
+});
+
+test("isPalindrome is functionnal ", () => {
+  expect(isPalindrome('palindrome')).toBe(false);
+});
+
+test("isPalindrome is functionnal with empty ", () => {
+  expect(isPalindrome('')).toBe(true);
+});
+
+test("isPalindrome is functionnal with null ", () => {
+  expect(isPalindrome(null)).toBe(true);
+});
