@@ -17,5 +17,19 @@ Add you own tests.
 */
 
 // TODO add your code here
+const compare = (string1, string2) => {
+  let count = 0;
+  if (
+    string1 !== null && string2 !== null &&
+    string1.length === string2.length
+  ) {
+    string1.split("").forEach((element, i) => {
+      string1.charAt(i) === string2.charAt(i) ? count++ : null;
+    });
+    return count;
+  }
+  else
+    return -1;
+};
 
 module.exports = compare;
