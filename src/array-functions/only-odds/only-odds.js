@@ -9,6 +9,13 @@ Don't mutate the parameter.
 
 // TODO add your code here
 
+const odd = (array) => {
+  const newArray = array.filter((element) => element % 2 == 1);
+  return newArray;
+};
+
+console.log(odd([1, 2, 3, 4, 5, 6, 7]));
+
 // Begin of tests
 const assert = require("assert");
 
