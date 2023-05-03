@@ -23,10 +23,15 @@ result: [
 You can't use a loop!
 
 Don't mutate the parameter.
-
 */
 
 // TODO add your code here
+const censor = (array, forbiddenWord) => {
+  const newArray = array.map((sentence) => {
+    return ((forbiddenWord !== null && forbiddenWord !== undefined) ? sentence.replace(new RegExp("\\b" + forbiddenWord + "\\b"), "*".repeat(forbiddenWord.length)): sentence);
+  });
+  return newArray;
+};
 
 // Begin of tests
 const assert = require("assert");
@@ -70,4 +75,4 @@ assert.deepStrictEqual(
   "don't mutate the parameter"
 );
 
-// End of tests
+// // End of tests
