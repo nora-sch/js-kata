@@ -12,6 +12,11 @@ Don't mutate the parameter.
 */
 
 // TODO add your code here
+const pascalCase = (sentence) => {
+  return sentence.toLowerCase().split(" ").map(word => {return(word.charAt(0).toUpperCase()+word.slice(1))}).join('');
+}
+
+console.log(pascalCase("sO rAdicAL DuDe"));
 
 // Begin of tests
 const assert = require("assert");
