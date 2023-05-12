@@ -30,6 +30,31 @@ Add you own tests.
 
 // TODO add your code here
 
+const getScore = (scores) => {
+  let serving_score = 0;
+  let receiving_score = 0;
+  for (let i = 0; i < scores.length; i++) {
+    scores[i] === 1 ? serving_score++ : receiving_score++;
+    if (serving_score >= 3 && receiving_score >= 3) {
+      if (serving_score === 3 && receiving_score === 3 && i === scores.length - 1 ) {
+        return "deuce";
+      } else if (serving_score > 3) {
+        return "ad in";
+      } else if (receiving_score > 3) {
+        return "ad out";
+      }
+    }
+  }
+
+  return `${
+    serving_score === 0 ? "love" : serving_score === 1 ? "15" : serving_score === 2 ? "30" : "40" }-${ receiving_score === 0 ? "love"
+      : receiving_score === 1 ? "15" : receiving_score === 2 ? "30" : "40" }`;
+};
+
+console.log(getScore([1, 1, 2, 2, 2, 2])); // [1, 1, 1, 2, 2, 2, 1] add in  [1, 1, 1, 2, 2, 2, 2] add out
+console.log(getScore([1, 1, 1, 2, 2, 2, 1])); //  add in
+console.log(getScore([1, 1, 1, 2, 2, 2, 2])); // add out
+
 // Begin of tests
 const assert = require("assert");
 
