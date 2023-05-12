@@ -25,6 +25,50 @@ class Shape {
 }
 
 // TODO add your code here
+class Rectangle extends Shape {
+  constructor(width, length) {
+    super();
+    this.width = width;
+    this.length = length;
+  }
+
+  area() {
+    return this.width * this.length;
+  }
+}
+class Triangle extends Shape {
+  constructor(width, height) {
+    super();
+    this.width = width;
+    this.height = height;
+  }
+
+  area() {
+    return (this.width * this.height) / 2;
+  }
+}
+class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+
+  area() {
+    return Math.PI * Math.pow(this.radius, 2);
+  }
+}
+
+class Square extends Rectangle {
+  constructor(width) {
+    super(width, width);
+  }
+}
+
+const cercle = new Circle(1.954410048);
+const square = new Square(5);
+console.log(cercle.area())
+console.log(Math.PI)
+console.log(square.area());
 
 // Begin of tests
 const assert = require("assert");
