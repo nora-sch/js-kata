@@ -1,5 +1,6 @@
 /*
-Implement a function `uniq` which takes as input a sequence and returns a sequence in which all duplicate elements following each other have been reduced to one instance.
+Implement a function `uniq` which takes as input a sequence and returns 
+a sequence in which all duplicate elements following each other have been reduced to one instance.
 
 Example:
 * ['a','a','b','b','c','a','b','c'] --> ['a','b','c','a','b','c']
@@ -11,7 +12,25 @@ Bonus : do not use a loop
 */
 
 // TODO add your code here
+const uniq = (sequence) => {
+  const newSequence = sequence.filter(deleteDouble);
+  return newSequence; 
+};
 
+function deleteDouble(element, i, sequence) {
+  if (i < sequence.length) {
+    return element !== sequence[i + 1];
+  }
+  // else if(){
+  //    return [undefined]
+  // } 
+  else {
+    return true;// si c'est le dernier i - on prend l'element 
+  }
+}
+
+// console.log(uniq(["a", "a", "b", "b", "c", "a", "b", "c"]));
+console.log(uniq([undefined]));
 // Begin of tests
 const assert = require("assert");
 
@@ -40,4 +59,4 @@ let test = ["a", "a", "b"];
 uniq(test);
 assert.deepStrictEqual(test, ["a", "a", "b"], "don't mutate the parameter");
 
-// End of tests
+// // End of tests
