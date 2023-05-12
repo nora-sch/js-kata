@@ -18,18 +18,18 @@ const uniq = (sequence) => {
 };
 
 function deleteDouble(element, i, sequence) {
-  if (i < sequence.length) {
+  if(sequence.length <= 1){
+    return true;
+  }
+  else if (i < sequence.length) {
     return element !== sequence[i + 1];
   }
-  // else if(){
-  //    return [undefined]
-  // } 
   else {
     return true;// si c'est le dernier i - on prend l'element 
   }
 }
 
-// console.log(uniq(["a", "a", "b", "b", "c", "a", "b", "c"]));
+ console.log(uniq(["a", "a", "b", "b", "c", "a", "b", "c"]));
 console.log(uniq([undefined]));
 // Begin of tests
 const assert = require("assert");
