@@ -17,6 +17,31 @@ Add you own tests.
 */
 
 // TODO add your code here
+const encode = (string) => {
+  let count = 1;
+  let result = "";
+  for (let i = 0; i < string.length; i++) {
+    if (string.charAt(i) === string.charAt(i + 1)) {
+      count++;
+    } else {
+      if (i + 1 !== string.length) {
+        count > 2
+          ? (result += string.charAt(i) + count)
+          : (result += string.charAt(i).repeat(count));
+        count = 1;
+      } else if (count === 1) {
+        result = result + string.charAt(i);
+      } else {
+        count > 2
+          ? (result += string.charAt(i) + count)
+          : (result += string.charAt(i).repeat(count));
+
+        count = 1;
+      }
+    }
+  }
+  return result;
+};
 
 // Begin of tests
 const assert = require("assert");
