@@ -17,12 +17,12 @@ The function will throw :
 
 Example :
 
-grid :
-[
+grid :[
   [0, 0, 0, 1],
   [0, 1, 0, 0],
-  [1, 0, 0, 0]
-]
+  [1, 0, 0, 0],
+];
+
 row : 1
 column : 2
 
@@ -31,6 +31,75 @@ result : 2
 */
 
 // TODO add your code here
+const gridArray = [
+  [0, 0, 0, 1],
+  [0, 1, 0, 0],
+  [1, 0, 0, 0],
+];
+
+const sweep = (grid, row, column) => {
+  let isValid = false;
+  if (
+    typeof row === "number" &&
+    row !== null &&
+    typeof column === "number" &&
+    column !== null
+  ) {
+    if (grid !== null && Array.isArray(grid)) {
+      // ????????????
+      const rowsCount = grid.length;
+      if (rowsCount >= 1) {
+        for (let i = 0; i < rowsCount; i++) {
+          if (grid[i].length >= 1) {
+            for (let j = 0; j < grid[i].length; j++) {
+              if (grid[i][j] === 0 && grid[i][j] === 1) {
+              } else {
+                isValid = true;
+              }
+            }
+          } else {
+            throw new RangeError("il y a moins que une colonne");
+            // console.log("RangeError - il y a moins que une colonne");
+          }
+        }
+      } else {
+        throw new RangeError("il y a moins que une ligne");
+        // console.log("RangeError - il y a moins que une ligne");
+      }
+    } else {
+      throw new TypeError("grid n'est pas un tableau ou il est null");
+      // console.log("TypeError - grid est pas un tableau ou il est null");
+    }
+  } else {
+    throw new TypeError("ligne ou colonne n'est pas un numero ou est null");
+    // console.log("TypeError - ligne ou colonne n est pas un numero ou est null ");
+  }
+
+  // SI VALIDEE
+  if (isValid === true) {
+    console.log(grid[row - 1][column - 1]);
+    if (grid[row - 1][column - 1] === 1) {
+      console.log("kaboom");
+      return "kaboom";
+    } else { // CONTINUER !!!!!!!!!!!!!!!!!!!
+      let countBombs = 0;
+      for (let i = 0; i <= 2; i++) {
+        for (let j = 0; j <= 2; j++) {
+          if (grid[row - i]) {
+            if (grid[row - i][column - j]) {
+              if (grid[row - i][column - j] === 1) {
+                countBombs++;
+              }
+            }
+          }
+        }
+      }
+      return countBombs;
+    }
+  }
+};
+
+sweep(gridArray, 1, 2);
 
 // Begin of tests
 const assert = require("assert");
