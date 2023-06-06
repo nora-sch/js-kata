@@ -26,6 +26,99 @@ The function should throw :
 
 // TODO add your code here
 
+const filterLine = (array) => {
+  const countX = array.filter((element) => element === "X").length;
+  const countO = array.filter((element) => element === "O").length;
+  return [countX, countO];
+};
+const testWinner = (grid) => {
+  let playerX = 0;
+  let playerO = 0;
+  let lineToVerify = [];
+  let lineToVerify2 = [];
+  grid.forEach((row) => {
+    playerX += row.filter((cell) => cell === "X").length;
+    playerO += row.filter((cell) => cell === "O").length;
+  });
+  if (playerX > playerO + 1 || playerX < playerO - 1) {
+    return playerX > playerO ? "X is a cheater" : "O is a cheater";
+  } else {
+    grid.forEach((row) => {
+      const [countX, countO] = filterLine(row);
+      if (countX === 3) {
+        return "X wins";
+      } else if (countO === 3) {
+        return "0 wins";
+      }
+    });
+    for (let j = 0; j < 3; j++) {
+      for (let i = 0; i < 3; i++) {
+        lineToVerify.push(grid[i][j]);
+      }
+      const [countX, countO] = filterLine(lineToVerify);
+      lineToVerify=[];
+      if (countX === 3) {
+        return "X wins";
+      } else if (countO === 3) {
+        return "0 wins";
+      }
+    }
+    for (let i = 0; i < 3; i++) {
+      for (let j = i; j < i + 1; j++) {
+        lineToVerify.push(grid[i][j]);
+        lineToVerify2.push(grid[2 - j][i]);
+      }
+      const [countX, countO] = filterLine(lineToVerify);
+      lineToVerify=[];
+      if (countX === 3) {
+        return "X wins";
+      } else if (countO === 3) {
+        return "0 wins";
+      }
+      const [countX2, countO2] = filterLine(lineToVerify2);
+      lineToVerify2=[];
+      if (countX === 3) {
+        return "X wins";
+      } else if (countO === 3) {
+        return "0 wins";
+      }
+    }
+  }
+};
+const winner = (grid) => {
+  const legalCharacter = ["O", "X", " "];
+
+  if (grid !== null && Array.isArray(grid)) {
+    if (grid.length === 3) {
+      for (let i = 0; i < 3; i++) {
+        if (grid[i].length === 3) {
+          for (let j = 0; j < 3; j++) {
+            if (legalCharacter.includes(grid[i][j])) {
+              return testWinner(grid);
+            } else {
+              throw new Error("Illegal character");
+            }
+          }
+        } else {
+          throw new RangeError("Grid has not the column size expected");
+        }
+      }
+    } else {
+      throw new RangeError("Grid has not the row size expected");
+    }
+  } else {
+    throw new TypeError("Grid is not an array");
+  }
+};
+
+console.log(
+  winner([
+    ["O", "X", "O"],
+    ["O", "O", "O"],
+    ["X", "O", "X"],
+  ])
+);
+
 // Begin of tests
 const assert = require("assert");
 
