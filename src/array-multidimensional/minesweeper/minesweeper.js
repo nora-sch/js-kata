@@ -46,47 +46,43 @@ const sweep = (grid, row, column) => {
     column !== null
   ) {
     if (grid !== null && Array.isArray(grid)) {
-      // ????????????
       const rowsCount = grid.length;
-      if (rowsCount >= 1) {
+      if (rowsCount >= 1 && row >= 0 && row <= rowsCount) {
         for (let i = 0; i < rowsCount; i++) {
-          if (grid[i].length >= 1) {
+          if (grid[i].length >= 1 && column >= 0 && column <= grid[i].length) {
             for (let j = 0; j < grid[i].length; j++) {
-              if (grid[i][j] === 0 && grid[i][j] === 1) {
-              } else {
+              if (grid[i][j] === 0 || grid[i][j] === 1) {
                 isValid = true;
+              } else {
+                throw new TypeError("le numéro n'est pas 0 ou 1");
               }
             }
           } else {
             throw new RangeError("il y a moins que une colonne");
-            // console.log("RangeError - il y a moins que une colonne");
           }
         }
       } else {
         throw new RangeError("il y a moins que une ligne");
-        // console.log("RangeError - il y a moins que une ligne");
       }
     } else {
       throw new TypeError("grid n'est pas un tableau ou il est null");
-      // console.log("TypeError - grid est pas un tableau ou il est null");
     }
   } else {
     throw new TypeError("ligne ou colonne n'est pas un numero ou est null");
-    // console.log("TypeError - ligne ou colonne n est pas un numero ou est null ");
   }
 
   // SI VALIDEE
   if (isValid === true) {
-    console.log(grid[row - 1][column - 1]);
-    if (grid[row - 1][column - 1] === 1) {
+    console.log(grid[row][column]);
+    if (grid[row][column] === 1) {
       console.log("kaboom");
       return "kaboom";
-    } else { // CONTINUER !!!!!!!!!!!!!!!!!!!
+    } else {
       let countBombs = 0;
-      for (let i = 0; i <= 2; i++) {
-        for (let j = 0; j <= 2; j++) {
-          if (grid[row - i]) {
-            if (grid[row - i][column - j]) {
+      for (let i = 1; i >= -1; i--) {
+        for (let j = 1; j >= -1; j--) {
+          if (grid[row - i] !== undefined) {
+            if (grid[row - i][column - j] !== undefined) {
               if (grid[row - i][column - j] === 1) {
                 countBombs++;
               }
