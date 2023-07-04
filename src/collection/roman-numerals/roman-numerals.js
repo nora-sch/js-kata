@@ -27,6 +27,40 @@ romanNumerals.set("D", 500);
 romanNumerals.set("M", 1000);
 
 // TODO add your code here
+const convert = (string) => {
+  if (string !== null && string !== "") {
+    const acceptedNumeral = ["I", "V", "X", "L", "C", "D", "M"];
+
+    string.split("").forEach((letter) => {
+      if (!acceptedNumeral.includes(letter)) {
+        throw new Error("Illegal argument");
+      }
+    });
+    let number = 0;
+    let actual;
+    let next;
+
+    for (let i = 0; i < string.length; i++) {
+      if (i < string.length - 1) {
+        actual = romanNumerals.get(string[i]);
+        next = romanNumerals.get(string[i + 1]);
+        if (actual < next) {
+          number += next - actual;
+          i++;
+        } else {
+          number += actual;
+        }
+      } else {
+        number += romanNumerals.get(string[i]);
+      }
+    }
+    return number;
+  } else {
+    throw new Error("Illegal argument");
+  }
+};
+
+convert("XLIII");
 
 // Begin of tests
 const assert = require("assert");
