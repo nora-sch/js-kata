@@ -39,6 +39,20 @@ morseMap.set("..--..", "?");
 morseMap.set("-.-.--", "!");
 
 // TODO add your code here
+const decode = (string) => {
+    const phrase = string.split("   ")
+    let words = ""
+    phrase.forEach(word => {
+        const morse = word.split(" ")
+        morse.forEach(letter => {
+            words += morseMap.get(letter)
+        });
+        words += " "
+    });
+    return words.trim()
+}
+
+decode(".-- .. .-.. -..   -.-. --- -.. .")
 
 // Begin of tests
 const assert = require("assert");
