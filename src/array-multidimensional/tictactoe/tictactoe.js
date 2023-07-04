@@ -36,6 +36,7 @@ const testWinner = (grid) => {
   let playerO = 0;
   let lineToVerify = [];
   let lineToVerify2 = [];
+  let resultat = "Cat's game";
   grid.forEach((row) => {
     playerX += row.filter((cell) => cell === "X").length;
     playerO += row.filter((cell) => cell === "O").length;
@@ -46,21 +47,22 @@ const testWinner = (grid) => {
     grid.forEach((row) => {
       const [countX, countO] = filterLine(row);
       if (countX === 3) {
-        return "X wins";
+        resultat = "X wins";
       } else if (countO === 3) {
-        return "0 wins";
+        resultat = "O wins";
       }
     });
+
     for (let j = 0; j < 3; j++) {
       for (let i = 0; i < 3; i++) {
         lineToVerify.push(grid[i][j]);
       }
       const [countX, countO] = filterLine(lineToVerify);
-      lineToVerify=[];
+      lineToVerify = [];
       if (countX === 3) {
-        return "X wins";
+        resultat = "X wins";
       } else if (countO === 3) {
-        return "0 wins";
+        resultat = "O wins";
       }
     }
     for (let i = 0; i < 3; i++) {
@@ -68,22 +70,23 @@ const testWinner = (grid) => {
         lineToVerify.push(grid[i][j]);
         lineToVerify2.push(grid[2 - j][i]);
       }
-      const [countX, countO] = filterLine(lineToVerify);
-      lineToVerify=[];
-      if (countX === 3) {
-        return "X wins";
-      } else if (countO === 3) {
-        return "0 wins";
-      }
-      const [countX2, countO2] = filterLine(lineToVerify2);
-      lineToVerify2=[];
-      if (countX === 3) {
-        return "X wins";
-      } else if (countO === 3) {
-        return "0 wins";
-      }
+    }
+    const [countX, countO] = filterLine(lineToVerify);
+    lineToVerify = [];
+    if (countX === 3) {
+      resultat = "X wins";
+    } else if (countO === 3) {
+      resultat = "O wins";
+    }
+    const [countX2, countO2] = filterLine(lineToVerify2);
+    lineToVerify2 = [];
+    if (countX2 === 3) {
+      resultat = "X wins";
+    } else if (countO2 === 3) {
+      resultat = "O wins";
     }
   }
+  return resultat;
 };
 const winner = (grid) => {
   const legalCharacter = ["O", "X", " "];
@@ -93,9 +96,7 @@ const winner = (grid) => {
       for (let i = 0; i < 3; i++) {
         if (grid[i].length === 3) {
           for (let j = 0; j < 3; j++) {
-            if (legalCharacter.includes(grid[i][j])) {
-              return testWinner(grid);
-            } else {
+            if (!legalCharacter.includes(grid[i][j])) {
               throw new Error("Illegal character");
             }
           }
@@ -109,13 +110,14 @@ const winner = (grid) => {
   } else {
     throw new TypeError("Grid is not an array");
   }
+  return testWinner(grid);
 };
 
 console.log(
   winner([
-    ["O", "X", "O"],
-    ["O", "O", "O"],
     ["X", "O", "X"],
+    ["O", "O", "O"],
+    [" ", " ", "X"],
   ])
 );
 
